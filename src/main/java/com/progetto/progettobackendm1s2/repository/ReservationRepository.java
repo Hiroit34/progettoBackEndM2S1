@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public interface ReservationRepository extends JpaRepository<com.progetto.progettobackendm1s2.data.Reservation, Integer> {
+public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
     List<Reservation> findByUserAndDate(User user, LocalDate date);
     boolean existsByWorkstationAndDate(Workstation workstation, LocalDate date);
 }
