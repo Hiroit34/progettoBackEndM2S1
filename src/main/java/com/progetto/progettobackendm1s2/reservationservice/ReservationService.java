@@ -20,14 +20,16 @@ public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired
-    private WorkstationRepository workstationRepository;
+    private WorkstationService workstationService;
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
-    public Reservation createReservation(String username, Integer workstationId, LocalDate reservationDate) {
-        User user = userRepository.findByUserName(username);
-        Workstation workstation = workstationRepository.findById(workstationId)
-                .orElseThrow(() -> new RuntimeException("Workstation not found"));
+    public Reservation createReservation(Long userId, Long workstationId, LocalDate reservationDate) {
+        User user = userService.findById(userId);
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Workstation workstation = workstationService.findById(workstationId);
+//                .orElseThrow(() -> new RuntimeException("Workstation not found"));
 
         Reservation reservation = new Reservation();
         reservation.setUser(user);

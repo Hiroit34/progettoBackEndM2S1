@@ -10,5 +10,5 @@ import java.util.Optional;
 
 public interface WorkstationRepository extends JpaRepository<Workstation, Integer> {
     List<Workstation> findByTypeOfWorkStationAndBuilding (TypeOfWorkstation type, Building building);
-    Optional<Workstation> findById(Integer id);
+    Optional<Workstation> findById(Long id);
 }

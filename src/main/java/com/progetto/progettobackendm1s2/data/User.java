@@ -14,11 +14,11 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "username")
     private String userName;
+    @Column(name = "fullname")
     private String fullName;
+    @Column(name = "email")
     private String email;
 
-    public RuntimeException orElseThrow(Object o) {
-        return new RuntimeException("NON SI TROVA IL CAZZO DI USER DIO PORCO");
-    }
 }

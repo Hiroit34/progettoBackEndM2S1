@@ -70,7 +70,7 @@ public class Runner implements CommandLineRunner {
                     .build();
 
             Workstation workstation0 = Workstation.builder()
-                    .withId(0L)
+                    .withId(3L)
                     .withBuilding(building0)
                     .withDescription("Sala usata per fare le riunioni")
                     .withMaxUser(4)
@@ -87,8 +87,11 @@ public class Runner implements CommandLineRunner {
             System.out.println("edifici salvati correttamente");
             System.out.println("user salvati correttamente");
             System.out.println("postazioni salvati correttamente");
+            System.out.println(reservationService.createReservation(user1.getId(),workstation0.getId(), LocalDate.now()));
 
-//            reservationService.createReservation(user0.getUserName(), Math.toIntExact(workstation0.getId()), LocalDate.now());
+
+
+//            reservationService.createReservation(user1.getId(),workstation0.getId(), LocalDate.now());
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {

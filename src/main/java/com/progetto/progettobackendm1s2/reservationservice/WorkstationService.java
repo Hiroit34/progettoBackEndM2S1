@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WorkstationService {
@@ -18,6 +19,11 @@ public class WorkstationService {
     private WorkstationRepository workstationRepository;
     @Autowired
     private BuildingRepository buildingRepository;
+
+    public Workstation findById(Long id) {
+        Optional<Workstation> workstationOptional = workstationRepository.findById(id);
+        return workstationOptional.orElse(null);
+    }
 
     public List<Workstation> findByTypeOfWorkStationAndBuilding(TypeOfWorkstation type, String city) {
         Building building = buildingRepository.findByCity(city);
