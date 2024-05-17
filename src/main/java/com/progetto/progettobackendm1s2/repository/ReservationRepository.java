@@ -12,4 +12,5 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
     List<Reservation> findByUserAndDate(User user, LocalDate date);
     boolean existsByWorkstationAndDate(Workstation workstation, LocalDate date);
+    boolean existsByUserAndReservationDate(User user, LocalDate reservationDate);
 }

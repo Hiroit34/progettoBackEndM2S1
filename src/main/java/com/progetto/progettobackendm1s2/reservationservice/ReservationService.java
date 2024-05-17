@@ -32,10 +32,14 @@ public class ReservationService{
         Reservation reservation = new Reservation();
         reservation.setUser(user);
         reservation.setWorkstation(workstation);
-        reservation.setDate(date);
+        reservation.setReservationDate(date);
 
         return (ReservationRepository) reservationRepository.save(reservation);
 
+    }
+
+    public boolean isUserAlreadyReserved(User user, LocalDate reservationDate) {
+        return reservationRepository.existsByUserAndReservationDate(user, reservationDate);
     }
 
 }

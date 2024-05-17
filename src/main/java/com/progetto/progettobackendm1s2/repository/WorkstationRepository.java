@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface WorkstationRepository extends JpaRepository<Workstation, Integer> {
-    List<WorkstationRepository> findByTypeOfWorkStationAndBuilding (TypeOfWorkstaion type, Building building);
+    List<Workstation> findByTypeOfWorkStationAndBuilding (TypeOfWorkstaion type, Building building);
 }
