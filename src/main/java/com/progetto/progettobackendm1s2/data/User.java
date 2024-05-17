@@ -18,4 +18,7 @@ public class User{
     private String fullName;
     private String email;
 
+    public RuntimeException orElseThrow(Object o) {
+        return new RuntimeException("NON SI TROVA IL CAZZO DI USER DIO PORCO");
+    }
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ReservationService {
@@ -23,10 +24,9 @@ public class ReservationService {
     @Autowired
     private UserRepository userRepository;
 
-    public Reservation createReservation(String username, Long workstationId, LocalDate reservationDate) {
-        User user = userRepository.findById(Integer.valueOf(username))
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        Workstation workstation = workstationRepository.findById(Math.toIntExact(workstationId))
+    public Reservation createReservation(String username, Integer workstationId, LocalDate reservationDate) {
+        User user = userRepository.findByUserName(username);
+        Workstation workstation = workstationRepository.findById(workstationId)
                 .orElseThrow(() -> new RuntimeException("Workstation not found"));
 
         Reservation reservation = new Reservation();
@@ -43,5 +43,9 @@ public class ReservationService {
 
     public boolean isWorkstationAvailable(Workstation workstation, LocalDate reservationDate) {
         return !reservationRepository.existsByWorkstationAndReservationDate(workstation, reservationDate);
+    }
+
+    public List<Reservation> reservationsByUserAndDate(User user, LocalDate reservationDate) {
+        return reservationRepository.findByUserAndReservationDate(user, reservationDate);
     }
 }
