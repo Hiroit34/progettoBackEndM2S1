@@ -51,26 +51,26 @@ public class Runner implements CommandLineRunner {
                     .build();
 
             User user0 = User.builder()
-                    .withId(0L)
+                    .withId(1L)
                     .withFullName("Franz Natavio")
                     .withEmail("franz@natavio.com")
                     .withUserName("0")
                     .build();
             User user1 = User.builder()
-                    .withId(1L)
+                    .withId(2L)
                     .withFullName("Rosa Sorpreso")
                     .withEmail("rosa@sorpreso.com")
                     .withUserName("1")
                     .build();
             User user2 = User.builder()
-                    .withId(2L)
+                    .withId(3L)
                     .withFullName("Simone Giarnera")
                     .withEmail("simone@Giarnera.com")
                     .withUserName("MastrOdio")
                     .build();
 
             Workstation workstation0 = Workstation.builder()
-                    .withId(3L)
+                    .withId(1L)
                     .withBuilding(building0)
                     .withDescription("Sala usata per fare le riunioni")
                     .withMaxUser(4)
@@ -78,7 +78,7 @@ public class Runner implements CommandLineRunner {
                     .build();
 
             Workstation workstation1 = Workstation.builder()
-                    .withId(4L)
+                    .withId(2L)
                     .withBuilding(building0)
                     .withDescription("Sala usata")
                     .withMaxUser(9)
@@ -86,30 +86,33 @@ public class Runner implements CommandLineRunner {
                     .build();
 
             Workstation workstation2 = Workstation.builder()
-                    .withId(5L)
+                    .withId(3L)
                     .withBuilding(building0)
                     .withDescription("Sala")
                     .withMaxUser(2)
                     .withTypeOfWorkStation(TypeOfWorkstation.MEETING_ROOM)
                     .build();
 
-
             buildingRepository.save(building0);
             buildingRepository.save(building1);
             buildingRepository.save(building2);
             userRepository.save(user0);
             userRepository.save(user1);
+            userRepository.save(user2);
             workstationRepository.save(workstation0);
             workstationRepository.save(workstation1);
             workstationRepository.save(workstation2);
+
+            reservationService.createReservation(user1.getId(),workstation0.getId(), LocalDate.now().plusYears(1));
+            reservationService.createReservation(user0.getId(), workstation2.getId(), LocalDate.now().plusMonths(1));
+            reservationService.createReservation(user2.getId(), workstation1.getId(), LocalDate.now().plusDays(1));
 
             System.out.println("edifici salvati correttamente");
             System.out.println("user salvati correttamente");
             System.out.println("postazioni salvati correttamente");
             System.out.println(reservationService.createReservation(user1.getId(),workstation0.getId(), LocalDate.now()));
-            reservationService.createReservation(user1.getId(),workstation0.getId(), LocalDate.now());
-            reservationService.createReservation(user0.getId(), workstation2.getId(), LocalDate.now());
-            reservationService.createReservation(user2.getId(), workstation1.getId(), LocalDate.now().plusDays(1));
+            System.out.println(reservationService.createReservation(user0.getId(),workstation2.getId(), LocalDate.now()));
+            System.out.println(reservationService.createReservation(user2.getId(), workstation1.getId(), LocalDate.now().plusDays(1)));
 
 
 //            reservationService.createReservation(user1.getId(),workstation0.getId(), LocalDate.now());
