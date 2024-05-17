@@ -77,18 +77,39 @@ public class Runner implements CommandLineRunner {
                     .withTypeOfWorkStation(TypeOfWorkstation.PRIVATE)
                     .build();
 
+            Workstation workstation1 = Workstation.builder()
+                    .withId(4L)
+                    .withBuilding(building0)
+                    .withDescription("Sala usata")
+                    .withMaxUser(9)
+                    .withTypeOfWorkStation(TypeOfWorkstation.OPEN_SPACE)
+                    .build();
+
+            Workstation workstation2 = Workstation.builder()
+                    .withId(5L)
+                    .withBuilding(building0)
+                    .withDescription("Sala")
+                    .withMaxUser(2)
+                    .withTypeOfWorkStation(TypeOfWorkstation.MEETING_ROOM)
+                    .build();
+
+
             buildingRepository.save(building0);
             buildingRepository.save(building1);
             buildingRepository.save(building2);
             userRepository.save(user0);
             userRepository.save(user1);
             workstationRepository.save(workstation0);
+            workstationRepository.save(workstation1);
+            workstationRepository.save(workstation2);
 
             System.out.println("edifici salvati correttamente");
             System.out.println("user salvati correttamente");
             System.out.println("postazioni salvati correttamente");
             System.out.println(reservationService.createReservation(user1.getId(),workstation0.getId(), LocalDate.now()));
-
+            reservationService.createReservation(user1.getId(),workstation0.getId(), LocalDate.now());
+            reservationService.createReservation(user0.getId(), workstation2.getId(), LocalDate.now());
+            reservationService.createReservation(user2.getId(), workstation1.getId(), LocalDate.now().plusDays(1));
 
 
 //            reservationService.createReservation(user1.getId(),workstation0.getId(), LocalDate.now());
