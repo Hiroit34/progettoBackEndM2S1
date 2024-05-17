@@ -18,7 +18,7 @@ public class Workstation {
     private Long id;
     private String description;
     @Enumerated(EnumType.STRING)
-    private TypeOfWorkstaion typeOfWorkStation;
+    private TypeOfWorkstation typeOfWorkStation;
     private int maxUser;
 
     @ManyToOne

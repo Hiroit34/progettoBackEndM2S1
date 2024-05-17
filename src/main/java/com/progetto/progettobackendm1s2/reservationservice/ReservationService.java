@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 @Service
-public class ReservationService{
+public class ReservationService {
 
     @Autowired
     private ReservationRepository reservationRepository;
@@ -23,23 +23,25 @@ public class ReservationService{
     @Autowired
     private UserRepository userRepository;
 
-    public ReservationRepository createReservation(String username, Long workstationId, LocalDate date){
+    public Reservation createReservation(String username, Long workstationId, LocalDate reservationDate) {
         User user = userRepository.findById(Integer.valueOf(username))
-                .orElseThrow(() -> new RuntimeException("User not find"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
         Workstation workstation = workstationRepository.findById(Math.toIntExact(workstationId))
                 .orElseThrow(() -> new RuntimeException("Workstation not found"));
 
         Reservation reservation = new Reservation();
         reservation.setUser(user);
         reservation.setWorkstation(workstation);
-        reservation.setReservationDate(date);
+        reservation.setReservationDate(reservationDate);
 
-        return (ReservationRepository) reservationRepository.save(reservation);
-
+        return reservationRepository.save(reservation);
     }
 
     public boolean isUserAlreadyReserved(User user, LocalDate reservationDate) {
         return reservationRepository.existsByUserAndReservationDate(user, reservationDate);
     }
 
+    public boolean isWorkstationAvailable(Workstation workstation, LocalDate reservationDate) {
+        return !reservationRepository.existsByWorkstationAndReservationDate(workstation, reservationDate);
+    }
 }

@@ -1,7 +1,7 @@
 package com.progetto.progettobackendm1s2.Runner;
 
 import com.progetto.progettobackendm1s2.data.Building;
-import com.progetto.progettobackendm1s2.data.TypeOfWorkstaion;
+import com.progetto.progettobackendm1s2.data.TypeOfWorkstation;
 import com.progetto.progettobackendm1s2.data.User;
 import com.progetto.progettobackendm1s2.data.Workstation;
 import com.progetto.progettobackendm1s2.repository.BuildingRepository;
@@ -64,7 +64,7 @@ public class Runner implements CommandLineRunner {
                 .withBuilding(building0)
                 .withDescription("Sala usata per fare le riunioni")
                 .withMaxUser(4)
-                .withTypeOfWorkStation(TypeOfWorkstaion.PRIVATE)
+                .withTypeOfWorkStation(TypeOfWorkstation.PRIVATE)
                 .build();
 
         buildingRepository.save(building0);

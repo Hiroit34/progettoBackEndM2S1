@@ -25,6 +25,6 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "workstation_id")
     private Workstation workstation;
-
+    @Column(name = "reservation_date")
     private LocalDate reservationDate;
 }
